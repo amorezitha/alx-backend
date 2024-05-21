@@ -7,7 +7,8 @@ from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """A class `MRUCache` that inherits from `BaseCaching` and is a caching system.
+    """A class `MRUCache` that inherits 
+    from `BaseCaching` and is a caching system.
     """
     def __init__(self):
         """Initializes the cache.
