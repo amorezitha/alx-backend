@@ -35,3 +35,16 @@ class FIFOCache(BaseCaching):
         """return the value in `self.cache_data` linked to `key`
         """
         return self.cache_data.get(key, None)
+
+    def _balance(self, keyIn):
+        """ Removes the oldest item from the cache at MAX size.
+        """
+        keyOut = None
+        with self.__rlock:
+            if keyIn not in self.__keys:
+                keysLength = len(self.__keys)
+                if len(self.cache_data) == BaseCaching.MAX_ITEMS:
+                    keyOut = self.__keys.pop(0)
+                    self.cache_data.pop(keyOut)
+                self.__keys.insert(keysLength, keyIn)
+        return keyOut
